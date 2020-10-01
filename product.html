@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'nav.html'%}
+{% for items in obj %}
+    <hr>
+    <br>
+     <h1>{{items.Productname}}</h1>
+    <h2>{{ items.category }}</h2>
+    <h3>{{ items.mrp_price }}</h3>
+    <h4>{{ items.weight }}</h4>
+    <img src="{{items.image.url }}" alt="image" style="width:20% height:20%">
+
+    <br>
+
+{% endfor %}
+</body>
+</html>

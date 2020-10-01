@@ -1,0 +1,305 @@
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="foodguard">
+    <meta name="author" content="Ayush Saxena">
+    <meta name="keywords" content="foodguard">
+    <!-- Title Page-->
+    <title>My Account</title>
+{% load static %}
+<style>
+
+
+.account-settings ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+}
+
+.account-settings li {
+  float: left;
+}
+
+.account-settings li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.account-settings li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.account-settings li a.active {
+  color: white;
+  background-color: #007bff;
+}
+</style>
+</head>
+<body>
+{% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+ {% endif %}
+{% if page == 1 %}
+<div class="account-settings">
+<ul>
+  <li><a class="active" href="/account/1">Basic Info</a></li>
+  <li><a href="/account/2">Address</a></li>
+  <li><a href="/account/3">Password</a></li>
+</ul>
+</div>
+<div class="card card-3">
+<div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-row m-b-55">
+                            <div class="name">Name</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="first_name" value="{{crecord.first_name}}" readonly>
+                                            <label class="label--desc">first name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="last_name" value="{{crecord.last_name}}" readonly>
+                                            <label class="label--desc">last name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="name">Email</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="email" name="email" value="{{crecord.email}}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row m-b-55">
+                            <div class="name">Phone</div>
+                            <div class="value">
+                                <div class="row row-refine">
+                                    <div class="col-3">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="area_code" value="+91" readonly>
+                                            <label class="label--desc">Area Code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="phone" value="{{crecord.mobno}}">
+                                            <label class="label--desc">Phone Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						<div class="form-row m-b-55">
+                            <div class="name">Additional Phone</div>
+                            <div class="value">
+                                <div class="row row-refine">
+                                    <div class="col-3">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="text" name="area_code" value="+91" readonly>
+                                            <label class="label--desc">Area Code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="input-group-desc">
+                                            {% if crecord.mobno2 %}
+                                            <input class="input--style-5" type="text" name="phone2" value="{{crecord.mobno2}}">
+                                            {% else %}
+                                            <input class="input--style-5" type="text" name="phone2" placeholder="Enter additional mobile no">
+                                            {% endif %}
+                                            <label class="label--desc">Phone Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <button class="btn btn--radius-2 btn--red" type="submit">SAVE</button>
+
+                    </form> </div>
+</div>
+{% elif page == 2 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a class="active" href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row m-b-55">
+                                <div class="name">Address</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="country" value="India" readonly>
+                                                <label class="label--desc">Country</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="state" value="{{crecord.state}}">
+                                                <label class="label--desc">State</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row m-b-55">
+                                <div class="name"></div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="city" value="{{crecord.city}}">
+                                                <label class="label--desc">City</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="landmark" value="{{crecord.landmark}}">
+                                                <label class="label--desc">Landmark</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">&nbsp;</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="text" name="address" value="{{crecord.house_number}}">
+                                        <label class="label"> House no /street</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <button class="btn btn--radius-2 btn--red" type="submit">SAVE</button>
+
+                        </form> </div>
+    </div>
+{% elif page == 3 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a class="active" href="/account/3">Password</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row m-b-55">
+                                <div class="name">Current Password</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-1" type="password" name="pass">
+                                                {% if msg == 1 %}
+                                                <label style="color: red;">Wrong Password !</label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row m-b-55">
+                                <div class="name">New Password</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input" type="password" name="newpass">
+                                                {% if msg == 2 %}
+                                                <label style="color: red;">Password Not Matched!</label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row m-b-55">
+                                <div class="name">Re-Enter Password</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="password" name="newpass1">
+                                                {% if msg == 3 %}
+                                                <label style="color: green;">Password Changed</label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn--radius-2 btn--red" type="submit">Change Password</button>
+
+                        </form> </div>
+    </div>
+{% endif %}
+
+
+{% load static %}
+
+<script src="{% static 'acc/vendor/jquery/jquery.min.js' %}"></script>
+
+    <script src="{% static 'acc/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'acc/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'acc/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <script src="{% static 'acc/js/global.js"></script>
+
+
+{% load static %}
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>

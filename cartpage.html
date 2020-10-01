@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zxx" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!-- Required meta tags -->{% load static %}
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GO BETWEEN</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <!-- icon CSS -->
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>{% load static %}
+  <!--================Cart Area =================-->
+<h3>Cart items</h3>
+
+<br><br>
+  <section >
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            {% for items in citems %}
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="{{items.product.image.url }}" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>{{items.product.Brand|capfirst}},{{items.product.Productname|capfirst}},{{items.product.weight}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>Rs {{items.product.dic_price}}/-</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+
+                    <form method="post">
+                      {% csrf_token %}
+                      <button type="submit" name="submit_button" value="-">
+                       <i class="tiny material-icons">chevron_left</i>
+                      </button>
+                    <input class="input-number" name="{{items.pk}}" type="text" value="{{items.qty}}" min="0" max="10">
+                      <input type="hidden" id="{{items.pk}}" name="pname" value="{{items.pk}}">
+
+                    <button type="submit" name="submit_button" value="+">
+                      <i class="tiny material-icons">chevron_right</i>
+                    </button>
+                    </form>
+                  </div>
+                </td>
+                <td>
+                  <h5>Rs {% widthratio items.product.dic_price 1 items.qty %}/-</h5>
+                </td>
+              </tr>
+
+                {% endfor %}
+
+            <tr class="bottom_button">
+                <form method="get">
+                  {% csrf_token %}
+                <td>
+                 <button name="check" value="Reset" class="btn_1">Reset Cart</button>
+                </td>
+               </form>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="cupon_text float-right">
+                    <a href="/product/category/" class="btn_1">Add More</a>
+                  </div>
+                </td>
+
+            </tr>
+		<tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <h5>Rs.{{total_price}}</h5>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a href="/cart/placedorder/" class="btn_1 checkout_btn_1">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+      <br><br><br><br>
+
+  </section>
+  <!-- jquery plugins here-->{% load static %}
+    <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+    <!-- popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!-- bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- easing js -->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <!-- swiper js -->
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <!-- swiper js -->
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <!-- particles js -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <!-- slick js -->
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+    <!-- custom js -->
+ <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>
+
+
+
+

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+{% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GO BETWEEN</title>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+
+    <!-- Compiled and minified JavaScript -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
+    <script src="{% static 'js/bin/materialize.min.js' %}"></script>
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+ <!-- message -->
+{% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+ {% endif %}
+ <!-- message -->
+ <!-- Navigation -->
+{% include 'nav.html'%}
+{% if user.is_authenticated %}
+<br>
+ <button class="btn btn-primary" id="menu-toggle">Menu</button>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"> Hello, {{request.user.first_name|capfirst}}</div>
+      <div class="list-group list-group-flush">
+
+        {% if crecord %}
+        <a href="/product/category" class="list-group-item list-group-item-action bg-light">Shop by Category</a>
+        <a href="/cart" class="list-group-item list-group-item-action bg-light" ><i class="small material-icons" style="font-size: 15px">add_shopping_cart</i> Cart</a>
+        <a href="/customer/yourorder" class="list-group-item list-group-item-action bg-light">Your Orders</a>
+        {% else %}
+        <a href="/merchant/timeline/" class="list-group-item list-group-item-action bg-light">Merchant's Timeline</a>
+        <a href="/merchant/acceptedorder/" class="list-group-item list-group-item-action bg-light">Order Status</a>
+
+        {% endif %}
+        <a href="/account/" class="list-group-item list-group-item-action bg-light">Your Account</a>
+        <a href="/messages/" class="list-group-item list-group-item-action bg-light"><i class="small material-icons" style="font-size: 15px">announcement</i> Notifications</a>
+        <a href="/t&c" class="list-group-item list-group-item-action bg-light">T&C</a>
+        <a href="/f&q" class="list-group-item list-group-item-action bg-light">F&Q</a>
+        <a href="/l&a" class="list-group-item list-group-item-action bg-light">Legal & About</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Customer Service</a>
+
+
+
+
+      </div>
+    </div>
+    {% else %}
+    <div class="d-flex" id="wrapper">
+    {% endif %}
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+
+
+      <div class="container-fluid">
+
+                <div class="container">
+                      {% if user.is_authenticated %}
+
+                            {% include 'timeline.html'%}
+
+                      {% else %}
+                          {% include 'shome.html'%} <!-- page not fount tempplate -->
+                      {% endif %}
+               </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+
+  </script>
+
+
+  <!-- Page Content -->
+
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  </div>
+</body>
+
+</html>

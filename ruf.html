@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+{% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GO BETWEEN</title>
+{% load static %}
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+ <!-- message -->
+{% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+ {% endif %}
+ <!-- message -->
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">GO Between</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+             <li class="nav-item">
+               <a class="nav-link" href="customer/account">{{user.username|title}}</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="customer/logout">Logout</a>
+             </li>
+          {% else %}
+             <li class="nav-item">
+            <a class="nav-link" href="customer/">Customer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="merchant/">Merchant</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% if user.is_authenticated %}
+
+<button class="btn btn-primary" id="menu-toggle">Menu</button>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"> Hello, {{request.user.first_name}}</div>
+      <div class="list-group list-group-flush">
+
+        {% if crecord %}
+        <a href="#" class="list-group-item list-group-item-action bg-light">Shop by Category</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Cart</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Your Orders</a>
+        {% else %}
+        <a href="#" class="list-group-item list-group-item-action bg-light">Merchant's Timeline</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Order Status</a>
+
+        {% endif %}
+        <a href="#" class="list-group-item list-group-item-action bg-light">Your Account</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Notifications</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">T&C</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">F&Q</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Legal & About</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Customer Servise</a>
+
+
+
+
+      </div>
+    </div>
+    {% else %}
+    <div class="d-flex" id="wrapper">
+    {% endif %}
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+
+
+      <div class="container-fluid">
+        <h1 class="mt-4">Simple Sidebar</h1>
+        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+
+  </div>
+  <!-- /.container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+
+
+
+
+
+
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  </div>
+</body>
+
+</html>

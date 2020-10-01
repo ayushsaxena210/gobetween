@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADD Product</title>
+</head>
+<body>
+{% include 'nav.html'%}
+{% include 'navbaritems.html' %}
+{% include 'header.html' %}
+<form method="POST">
+        {% csrf_token %}
+        {{ u_form }}
+        <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
