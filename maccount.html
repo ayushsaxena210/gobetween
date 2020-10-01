@@ -1,0 +1,620 @@
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="foodguard">
+    <meta name="author" content="Ayush Saxena">
+    <meta name="keywords" content="foodguard">
+    <!-- Title Page-->
+    <title>My Account</title>
+{% load static %}
+<style>
+
+
+.account-settings ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+}
+
+.account-settings li {
+  float: left;
+}
+
+.account-settings li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.account-settings li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.account-settings li a.active {
+  color: white;
+  background-color: #007bff;
+}
+
+.container_poster {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.container_poster img {
+    width: 100%;
+    height: auto;
+}
+
+</style>
+</head>
+<body>
+{% if page == 1 %}
+    <div class="account-settings">
+    <ul>
+      <li><a class="active" href="/account/1">Basic Info</a></li>
+      <li><a href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row m-b-55">
+                                <div class="name">Name</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="first_name" value="{{Mrecord.first_name}}" readonly>
+                                                <label class="label--desc">first name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="last_name" value="{{Mrecord.last_name}}" readonly>
+                                                <label class="label--desc">last name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">Email</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="email" name="email" value="{{Mrecord.email}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row m-b-55">
+                                <div class="name">Phone</div>
+                                <div class="value">
+                                    <div class="row row-refine">
+                                        <div class="col-3">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="area_code" value="+91" readonly>
+                                                <label class="label--desc">Area Code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="phone" value="{{Mrecord.mobno}}">
+                                                <label class="label--desc">Phone Number</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row m-b-55">
+                                <div class="name">Additional Phone</div>
+                                <div class="value">
+                                    <div class="row row-refine">
+                                        <div class="col-3">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="area_code" value="+91" readonly>
+                                                <label class="label--desc">Area Code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="input-group-desc">
+                                                {% if Mrecord.mobno2 %}
+                                                <input class="input--style-5" type="text" name="phone2" value="{{Mrecord.mobno2}}">
+                                                {% else %}
+                                                <input class="input--style-5" type="text" name="phone2" placeholder="Enter additional mobile no">
+                                                {% endif %}
+                                                <label class="label--desc">Phone Number</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <button class="btn btn--radius-2 btn--red" type="submit">SAVE</button>
+
+                        </form> </div>
+    </div>
+{% elif page == 2 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a class="active" href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row m-b-55">
+                                <div class="name">Store Address</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="country" value="India" readonly>
+                                                <label class="label--desc">Country</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="state" value="{{Mrecord.state}}">
+                                                <label class="label--desc">State</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row m-b-55">
+                                <div class="name"></div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="city" value="{{Mrecord.city}}">
+                                                <label class="label--desc">City</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="text" name="landmark" value="{{Mrecord.landmark}}">
+                                                <label class="label--desc">Landmark</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">&nbsp;</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="text" name="address" value="{{Mrecord.house_number}}">
+                                        <label class="label">Street</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <button class="btn btn--radius-2 btn--red" type="submit">SAVE</button>
+
+                        </form> </div>
+    </div>
+{% elif page == 3 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a class="active" href="/account/3">Password</a></li>
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row m-b-55">
+                                <div class="name">Current Password</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-1" type="password" name="pass">
+                                                {% if msg == 1 %}
+                                                <label style="color: red;">Wrong Password !</label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row m-b-55">
+                                <div class="name">New Password</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input" type="password" name="newpass">
+                                                {% if msg == 2 %}
+                                                <label style="color: red;">Password Not Matched!</label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row m-b-55">
+                                <div class="name">Re-Enter Password</div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="password" name="newpass1">
+                                                {% if msg == 3 %}
+                                                <label style="color: green;">Password Changed</label>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn--radius-2 btn--red" type="submit">Change Password</button>
+
+                        </form> </div>
+    </div>
+{% elif page == 4 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+        <li><a class="active" href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="name">Facebook link</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="url" name="fblink" value="{{Mrecord.fb_link}}">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="name">Instagram link</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="url" name="inlink" value="{{Mrecord.in_link}}">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="name">Twitter link</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="url" name="twlink" value="{{Mrecord.twitter_link}}">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="name">Website Url</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-4" type="url" name="weburl" value="{{mstore.website_url}}">
+                                    </div>
+                                </div>
+                            </div>
+                                <button class="btn btn--radius-2 btn--red" type="submit">SAVE</button>
+                        </form> </div>
+    </div>
+{% elif page == 5 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a class="active" href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="name">Shop Name</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="text" name="shopname" value="{{Mrecord.shop_name|title}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row m-b-55">
+                                <div class="name"></div>
+                                <div class="value">
+                                    <div class="row row-space">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                {% if Mrecord.tin_number %}
+                                                <input class="input--style-5" type="text" name="gstinno" value="{{Mrecord.tin_number}}">
+                                                {% else %}
+                                                <input class="input--style-5" type="text" name="gstinno">
+                                                {% endif %}
+                                                <label class="label--desc">GSTIN Number</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5" type="number" name="drange" value="0" readonly>
+                                                <label class="label--desc">Dilivery Range<br>(Enter in KM)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">About us</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <textarea rows="4" cols="30" class="input--style-5 form-control" type="text" name="AboutUs">
+                                        {{Mrecord.aboutstore}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">Return & Exchange</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <textarea rows="4" cols="30" class="input--style-5 form-control" type="text" name="return&exchange" value="{{Mrecord.shop_name|title}}">
+                                        {{Mrecord.return_exchange}}
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">Shipping Info</div>
+                                <div class="value">
+                                        <textarea rows="4" cols="10" class="input--style-5 form-control" type="text" name="shippinginfo" placeholder="{{Mrecord.shop_name|title}}">
+                                        {{Mrecord.shipping_info}}
+                                        </textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="name">Select Category</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <div class="form-check">
+                                          &nbsp;<input class="form-check-input" type="checkbox" value="1" name="grocery" id="grocery">
+                                          <label class="form-check-label" for="grocery">
+                                            Grocery&nbsp;
+                                          </label>
+                                            &nbsp;<input class="form-check-input" type="checkbox" value="1" name="vegetable" id="vegetable">
+                                          <label class="form-check-label" for="vegetable">
+                                            Vegetable&nbsp;
+                                          </label>
+                                            &nbsp;<input class="form-check-input" type="checkbox" value="1" name="fruits" id="fruits">
+                                          <label class="form-check-label" for="fruits">
+                                            Fruit&nbsp;
+                                          </label>
+                                            &nbsp;<input class="form-check-input" type="checkbox" value="1" name="medicines" id="medicines">
+                                          <label class="form-check-label" for="medicines">
+                                            Medical Products&nbsp;
+                                          </label>
+                                            {% for cat in Mrecord.productcategory.all %}
+                                                <script>
+                                                function check() {
+                                                document.getElementById("{{cat.name}}").checked = true;
+                                                }check();
+                                                </script>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Delivery Cost</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <input class="input--style-5" type="number" name="diliverycost" value="{{mstore.delivery_cost}}">
+                                        <label>Enter in Rs</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn--radius-2 btn--red" type="submit">SAVE</button>
+                        </form> </div>
+    </div>
+{% elif page == 6 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a class="active" href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                                <div class="form-row">
+                                <div class="name">Main Banner</div>
+                                <div class="value">
+                                    <div class="input-group">
+
+                                            <div class="container_poster">
+                                              <img src="/media/{{mstore.bigposter}}" alt="Snow" style="width:100%">
+                                              <input type="file" id="bigposter" name="bigposter" value="" onclick="alert('Upload image of size 500X1500');">
+                                                <label for="bigposter">Choose another file to Change</label>
+                                            </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="name">Poster</div>
+                                <div class="value">
+                                    <div class="input-group">
+
+                                            <div class="container_poster">
+                                              <img src="/media/{{mstore.smallposter}}" alt="Snow" style="width:100%">
+                                              <input type="file" id="smallposter" name="smallposter" value="" onclick="alert('Upload image of size 300X300');">
+                                                <label for="smallposter">Choose another file to Change</label>
+                                            </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="name">2nd Poster</div>
+                                <div class="value">
+                                    <div class="input-group">
+
+                                            <div class="container_poster">
+                                              <img src="/media/{{mstore.smallposter2}}" alt="Snow" style="width:100%">
+                                              <input type="file" id="smallposter2" name="smallposter2" value="" onclick="alert('Upload image of size 300X300');">
+                                                <label for="smallposter2">Choose another file to Change</label>
+                                            </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <button class="btn btn--radius-2 btn--red" type="submit">Update</button>
+                        </form> </div>
+    </div>
+{% elif page == 7 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a class="active" href="/account/7">Services</a></li>
+        <li><a href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="name">Apply for SMS service</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <button class="input--style-5" type="button" disabled>Click here!</button>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="name">Paid Promotions</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <button class="input--style-5" type="button" disabled>Click here!</button>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="name">Gold Membership</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <button class="input--style-5" type="button" disabled>Click here!</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                                </div>
+    </div>
+{% elif page == 8 %}
+    <div class="account-settings">
+    <ul>
+      <li><a href="/account/1">Basic Info</a></li>
+      <li><a  href="/account/2">Address</a></li>
+      <li><a href="/account/3">Password</a></li>
+        <li><a href="/account/4">Social Media</a></li>
+        <li><a href="/account/5">Store</a></li>
+        <li><a href="/account/6">Posters</a></li>
+        <li><a href="/account/7">Services</a></li>
+        <li><a class="active" href="/account/8">View Your Site</a></li>
+    </ul>
+    </div>
+    <div class="card card-3">
+    <div class="card-body">
+{% block content %}
+
+        {% include 'previewsite.html'%}
+ {% endblock %}
+    </div>
+    </div>
+{% endif %}
+
+
+{% load static %}
+
+<script src="{% static 'acc/vendor/jquery/jquery.min.js' %}"></script>
+
+    <script src="{% static 'acc/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'acc/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'acc/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <script src="{% static 'acc/js/global.js"></script>
+
+
+{% load static %}
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>

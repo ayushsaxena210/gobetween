@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<link rel="stylesheet" href="../media/css/materialize.css' %}">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<style type="text/css">
+	.login-form {
+		width: 540px;
+    	margin: 60px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body><div class="login-form">
+<form method="POST">
+<h2 class="text-center">Registration</h2><br><br>
+    <h6>Name: {{ request.user.first_name }} {{ request.user.last_name }}</h6>
+    <h6>Email: {{ request.user.email }}</h6>
+    {% csrf_token %}
+    <label for="mobno">Mobile Number:</label><br>
+    <input type="text" id="mobno" name="mobno"><br>
+
+    <label for="mobno2">Additional Mobile Number:</label><br>
+    <input type="text" id="mobno2" name="mobno2"><br>
+
+     <label for="age">Age:</label><br>
+    <input type="text" id="age" name="age"><br>
+
+    <label for="state"></label>State:<br>
+    <input type="text" id="state" name="state"><br>
+
+    <label for="country">Country:</label><br>
+    <input type="text" id="country" name="country" value="India" readonly><br>
+
+    <label for="city">City:</label><br>
+    <input type="text" id="city" name="city"><br>
+
+     <label for="landmark">Landmark:</label><br>
+    <input type="text" id="landmark" name="landmark"><br>
+
+    <label for="house_number">House Number:</label><br>
+    <input type="text" id="house_number" name="house_number"><br>
+
+    <label for="pincode">Pincode:</label><br>
+    <input type="text" id="pincode" name="pincode"><br>
+
+    <label for="longitude">longitude</label><br>
+    <input type="text" id="longitude" name="longitude"><br>
+
+      <label for="langitude">langitude</label><br>
+    <input type="text" id="langitude" name="langitude"><br>
+    <br>
+  <input type="submit" value="Submit">
+</form></div></body>
+</html>

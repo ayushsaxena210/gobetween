@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+{% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GO BETWEEN</title>
+{% load static %}
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+  <link href="{% static 'css/shop-homepage.css' %}" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">GoBetween</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+             <li class="nav-item">
+               <a class="nav-link" href="/account/">{{user.username|title}}</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="customer/logout">Logout</a>
+             </li>
+          {% else %}
+             <li class="nav-item">
+            <a class="nav-link" href="customer/">Customer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="merchant/">Merchant</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% if user.is_authenticated %}
+<br>
+ <button class="btn btn-primary" id="menu-toggle">Menu</button>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"> Hello, {{request.user.first_name|capfirst}}</div>
+      <div class="list-group list-group-flush">
+
+        {% if crecord %}
+        <a href="/product/category" class="list-group-item list-group-item-action bg-light">Open Market</a>
+        <a href="/localmerchants/" class="list-group-item list-group-item-action bg-light" >Local Merchants</a>
+        <a href="/customer/yourorder" class="list-group-item list-group-item-action bg-light">Your Orders</a>
+        {% else %}
+        <a href="/merchant/timeline/" class="list-group-item list-group-item-action bg-light">Merchant's Timeline</a>
+        <a href="/merchant/acceptedorder/" class="list-group-item list-group-item-action bg-light">Order Status</a>
+
+        {% endif %}
+        <a href="/account/" class="list-group-item list-group-item-action bg-light">Your Account</a>
+        <a href="/messages/" class="list-group-item list-group-item-action bg-light"><i class="small material-icons" style="font-size: 15px">announcement</i> Notifications</a>
+        <a href="/t&c" class="list-group-item list-group-item-action bg-light">T&C</a>
+        <a href="/f&q" class="list-group-item list-group-item-action bg-light">FAQs</a>
+        <a href="/l&a" class="list-group-item list-group-item-action bg-light">Legal & About</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Customer Service</a>
+
+
+      </div>
+    </div>
+    {% else %}
+    <div class="d-flex" id="wrapper">
+    {% endif %}
+    <!-- /#sidebar-wrapper -->
+<!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+    <!-- Page Content -->
+
+
+
+
+      <div class="container-fluid">
+                <div class="container">
+                      {% if user.is_authenticated %}
+                                    {% if crecord %}
+                                                {% include 'chome.html'%}
+                                    {% endif %}
+                                    {% if Mrecord %}
+                                         {% include 'mhome.html'%}
+                                    {% endif %}
+                      {% else %}
+                          {% include 'shome.html'%}
+                      {% endif %}
+               </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+
+
+
+  <!-- Page Content -->
+
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  </div>
+
+
+
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+{% include 'chatbot.html'%}
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+{% load static %}
+<head>
+{% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>GO BETWEEN</title>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Bootstrap core CSS -->
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+
+.container_message {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container_message::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+</style>
+</head>
+
+<body>
+ <!-- message -->
+{% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+ {% endif %}
+ <!-- message -->
+  <!-- Navigation -->
+
+  {% include 'nav.html'%}
+{% if user.is_authenticated %}
+<br>
+ <button class="btn btn-primary" id="menu-toggle">Menu</button>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"> Hello, {{request.user.first_name|capfirst}}</div>
+      <div class="list-group list-group-flush">
+
+        {% if crecord %}
+        <a href="/product/category" class="list-group-item list-group-item-action bg-light">Open Market</a>
+        <a href="/localmerchants/" class="list-group-item list-group-item-action bg-light" >Local Merchants</a>
+        <a href="/customer/yourorder" class="list-group-item list-group-item-action bg-light">Your Orders</a>
+        {% else %}
+        <a href="/merchant/timeline/" class="list-group-item list-group-item-action bg-light">Merchant's Timeline</a>
+        <a href="/merchant/acceptedorder/" class="list-group-item list-group-item-action bg-light">Order Status</a>
+
+        {% endif %}
+        <a href="/account/" class="list-group-item list-group-item-action bg-light">Your Account</a>
+        <a href="/messages/" class="list-group-item list-group-item-action bg-light"><i class="small material-icons" style="font-size: 15px">announcement</i> Notifications</a>
+        <a href="/t&c" class="list-group-item list-group-item-action bg-light">T&C</a>
+        <a href="/f&q" class="list-group-item list-group-item-action bg-light">F&Q</a>
+        <a href="/l&a" class="list-group-item list-group-item-action bg-light">Legal & About</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Customer Service</a>
+
+
+
+
+      </div>
+    </div>
+    {% else %}
+    <div class="d-flex" id="wrapper">
+    {% endif %}
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+
+                <div class="container">
+                      {% if user.is_authenticated %}
+                                   <div class="container-fluid">
+                                       {% if messages %}
+                                            {% for mes in messages %}
+
+                                                    <div class="container_message">
+                                                        <p><b>{{mes.subject|title}}</b></p>
+                                                        <p>{{mes.text}}</p>
+                                                      <span class="time-right">{{mes.at_date_time}}</span>
+                                                    </div>
+                                             {% endfor %}
+                                       {% else %}
+                                          No Notifications!
+                                       {% endif %}
+                                   </div>
+                      {% else %}
+                          {% include 'shome.html'%}
+                      {% endif %}
+               </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+
+
+  <!-- Page Content -->
+      <div class="pagination">
+                          <span class="step-links">
+
+                              {% if messages.has_previous %}
+                                  <a href="?page=1">&laquo; first</a>
+                                  <a href="?page={{ messages.previous_page_number }}">previous</a>
+                              {% endif %}
+
+                              <span class="current">
+
+                                  Page {{ messages.number }} of {{ messages.paginator.num_pages }}.
+                              </span>
+
+                              {% if messages.has_next %}
+                                  <a href="?page={{ messages.next_page_number }}">next</a>
+                                  <a href="?page={{ messages.paginator.num_pages }}">last &raquo;</a>
+                              {% endif %}
+                          </span>
+                      </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+{% load static %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  </div>
+
+</body>
+
+</html>
